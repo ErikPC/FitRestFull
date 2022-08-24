@@ -14,7 +14,7 @@ public class EntrenosResource {
 
     @GET
     public List<Entrenos> getEntrenos() {
-        return repository.list();
+        return repository.getTodosEntrenos();
     }
 
     @GET

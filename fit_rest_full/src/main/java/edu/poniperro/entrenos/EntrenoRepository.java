@@ -20,28 +20,6 @@ public class EntrenoRepository implements PanacheMongoRepository<Entrenos> {
     @Inject
     MongoClient mongoClient;
 
-    public List<Entrenos> list() {
-        List<Entrenos> list = new ArrayList<>();
-        MongoCursor<Document> cursor = getCollection().find().iterator();
-        try {
-            while (cursor.hasNext()) {
-                Document document = cursor.next();
-                Entrenos entrenos = new Entrenos();
-                entrenos.setId(document.getString("id"));
-                entrenos.setLunes(document.getString("lunes"));
-                entrenos.setMartes(document.getString("martes"));
-                entrenos.setMiercoles(document.getString("miercoles"));
-                entrenos.setJueves(document.getString("jueves"));
-                entrenos.setViernes(document.getString("viernes"));
-                entrenos.setSabado(document.getString("sabado"));
-                entrenos.setDomingo(document.getString("domingo"));
-            }
-        } finally {
-            cursor.close();
-        }
-        return list;
-    }
-
     private MongoCollection getCollection() {
         return mongoClient.getDatabase("registro").getCollection("entrenos");
     }
@@ -51,4 +29,25 @@ public class EntrenoRepository implements PanacheMongoRepository<Entrenos> {
         return getCollection().countDocuments();
 
     }
+
+    public List<Entrenos> getTodosEntrenos() {
+        List<Entrenos> entreno = new ArrayList<>();
+        MongoCursor<Document> cursor = getCollection().find().iterator();
+        while (cursor.hasNext()) {
+            Document document = cursor.next();
+            Entrenos entrenos = new Entrenos();
+            entrenos.setId(document.getString("id"));
+            entrenos.setLunes(document.getString("lunes"));
+            entrenos.setMartes(document.getString("martes"));
+            entrenos.setMiercoles(document.getString("miercoles"));
+            entrenos.setJueves(document.getString("jueves"));
+            entrenos.setViernes(document.getString("viernes"));
+            entrenos.setSabado(document.getString("sabado"));
+            entrenos.setDomingo(document.getString("domingo"));
+            entreno.add(entrenos);
+        }
+        cursor.close();
+        return entreno;
+    }
+
 }
