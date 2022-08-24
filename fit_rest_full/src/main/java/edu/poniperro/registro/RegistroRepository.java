@@ -2,7 +2,6 @@ package edu.poniperro.registro;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import io.quarkus.arc.lookup.LookupIfProperty.List;
 import io.quarkus.mongodb.panache.PanacheMongoRepository;
 
 @ApplicationScoped
