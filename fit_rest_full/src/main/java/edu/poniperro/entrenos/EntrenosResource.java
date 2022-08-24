@@ -16,4 +16,10 @@ public class EntrenosResource {
     public List<Entrenos> getEntrenos() {
         return repository.list();
     }
+
+    @GET
+    @Path("/numero-entrenos")
+    public long numeroentrenos() {
+        return repository.getEntrenos();
+    }
 }
