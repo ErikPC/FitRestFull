@@ -43,7 +43,7 @@ public class EntrenoRepository implements PanacheMongoRepository<Entrenos> {
     }
 
     private MongoCollection getCollection() {
-        return mongoClient.getDatabase("registrio").getCollection("entrnos");
+        return mongoClient.getDatabase("registro").getCollection("entrnos");
     }
 
     public long getEntrenos() {
